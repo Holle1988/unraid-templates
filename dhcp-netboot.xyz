@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>dhcp-netboot.xyz</Name>
+  <Repository>samdbmg/dhcp-netboot.xyz</Repository>
+  <Registry>https://hub.docker.com/r/samdbmg/dhcp-netboot.xyz/</Registry>
+  <Network>br0</Network>
+  <MyIP>EnterIPHere(same Subnet as netbootxyz)</MyIP>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project/>
+  <Overview>This Docker container lets you PXE boot a whole bunch of installers and utilities on your local network, without much mucking about configuring DHCP and TFTP servers, using the excellent netboot.xyz project.&#xD;
+&#xD;
+It provides a ProxyDHCP service, so for most clients your network's existing DHCP server (e.g. your home router) continues to hand out IP addresses as normal. However when a PXE client makes a DHCP request, this container also responds to announce itself as a TFTP network boot target. It does this using dnsmasq to run a very minimal DHCP server, on top of the linuxserver/docker-netboot.xyz container.&#xD;
+&#xD;
+USAGE: Just fill in your IP for the Docker (if you not running it on HOST) and set IP Start Range at Parameters (always like XXX.XXX.XXX.1)&#xD;
+Port Forwaring not supportet (i tested it and i have Br0 with own IP for it: works):&#xD;
+Why do I need --net=host?&#xD;
+To play DHCP server, the container needs listen to broadcasts (XXX.XXX.XXX.255) on the target network, which doesn't seem to work with port forwarding.</Overview>
+  <Category>Tools: Other: Network:Proxy Network:Management Network:Other</Category>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon>https://d36jcksde1wxzq.cloudfront.net/be7833db9bddb4494d2a7c3dd659199a.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1641729940</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="-e DHCP_RANGE_START=" Target="yourSubnet" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">XXX.XXX.XXX.1</Config>
+  <Config Name="--cap-add=" Target="Must listen to Broadcast on *.255" Default="" Mode="" Description="" Type="Variable" Display="always" Required="true" Mask="false">NET_ADMIN</Config>
+</Container>
